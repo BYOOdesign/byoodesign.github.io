@@ -17,12 +17,26 @@
   --mint:    #3effc8;
   --mint-dk: #00c99a;
   --mint-bg: #0d2620;          /* dark mint bg for alternate sections */
+
+  /* ★ 밝은 배경 섹션용 변수 — 여기서 색상을 바꾸면 전체 반영 */
+  --gray-white: #f5f4f1;       /* 그레이-화이트 배경 (Portfolio, Notice 등) */
+  --gray-white2: #edecea;      /* 살짝 더 진한 그레이 (카드 배경 등) */
+  --gray-line:  rgba(0,0,0,0.09);  /* 밝은 배경에서 사용하는 구분선 */
+
+  /* ★ 민트 배경 섹션용 변수 */
+  --mint-section: #e8fff8;     /* 연한 민트 배경 */
+  --mint-section2: #d4f9ee;    /* 카드/행 배경 */
+
   --white:   #f4f2ed;
-  --off:     rgba(244,242,237,0.55);
-  --faint:   rgba(244,242,237,0.25);
-  --line:    rgba(244,242,237,0.10);
-  --line2:   rgba(244,242,237,0.06);
+  --off:     rgba(244,242,237,0.70);   /* ★ 가독성 개선: 0.55 → 0.70 */
+  --faint:   rgba(244,242,237,0.40);   /* ★ 가독성 개선: 0.25 → 0.40 */
+  --line:    rgba(244,242,237,0.14);   /* ★ 가독성 개선 */
+  --line2:   rgba(244,242,237,0.08);
   --yellow:  #f5c518;
+  /* 밝은 배경 전용 텍스트 색상 */
+  --dark-text:   #1a1a1a;
+  --dark-text2:  #444444;
+  --dark-text3:  #777777;
 
   --fs-display: clamp(52px, 8vw, 110px);
   --fs-h2:      clamp(32px, 4.5vw, 58px);
@@ -33,7 +47,8 @@
   --fs-tag:     10px;
 
   --font-sans: 'Noto Sans KR', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-mono: 'Noto Sans KR', sans-serif; /* ★ 단가표 고딕체 통일 — 모노 → 고딕 */
+  --font-mono-accent: 'DM Mono', monospace; /* 로고/태그 등 포인트용 */
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,12 +83,13 @@ nav {
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   font-size: 15px; font-weight: 700; letter-spacing: 0.06em;
+  font-family: var(--font-mono-accent);
   color: var(--white); text-decoration: none;
 }
 .nav-logo svg { flex-shrink: 0; }
 .nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  font-family: var(--font-mono-accent); font-size: 11px; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--off); text-decoration: none;
   transition: color .2s;
 }
@@ -94,7 +110,7 @@ nav {
   border-right: 1px solid var(--line);
 }
 .hero-tag {
-  font-family: var(--font-mono); font-size: var(--fs-tag);
+  font-family: var(--font-mono-accent); font-size: var(--fs-tag);
   letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint);
   margin-bottom: 24px;
   display: flex; align-items: center; gap: 12px;
@@ -122,7 +138,7 @@ h1 .ghost {
 }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  font-family: var(--font-mono-accent); font-size: 11px; font-weight: 500;
   letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
   padding: 13px 28px; transition: all .2s;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
@@ -180,7 +196,7 @@ h1 .ghost {
 }
 .marquee-inner { display: inline-flex; animation: slide 18s linear infinite; }
 .marquee-item {
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  font-family: var(--font-mono-accent); font-size: 11px; font-weight: 500;
   letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--black); padding: 0 36px;
 }
@@ -189,15 +205,18 @@ h1 .ghost {
 
 /* ────────────────────────────────────────
    SECTION UTILITY
+   ★ 배경 패턴: HERO(검정) → PORTFOLIO(연민트) → SERVICES(검정)
+              → WORKFLOW(검정2) → NOTICE(흰회색) → CONTACT(검정)
+   색상 변경은 위 :root 변수에서 수정하세요.
 ──────────────────────────────────────── */
 .sec-black  { background: var(--black);  }
 .sec-black2 { background: var(--black2); }
-.sec-mint   { background: var(--mint-bg); }
+.sec-mint   { background: var(--mint-section); } /* ★ 밝은 민트 배경 */
 
 section { padding: 100px 52px; border-bottom: 1px solid var(--line); }
 .sec-header { margin-bottom: 56px; }
 .sec-tag {
-  font-family: var(--font-mono); font-size: var(--fs-tag);
+  font-family: var(--font-mono-accent); font-size: var(--fs-tag);
   letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint);
   margin-bottom: 14px; display: flex; align-items: center; gap: 12px;
 }
@@ -218,33 +237,40 @@ h2 .ghost {
 .sec-desc strong { color: var(--white); font-weight: 500; }
 
 /* ────────────────────────────────────────
-   PORTFOLIO — MINT BG
+   PORTFOLIO — 연민트 배경 (밝은 배경)
+   ★ 이미지 넣는 법: pj-img div를 <img src="project1.jpg" class="pj-img"> 로 교체
 ──────────────────────────────────────── */
-#portfolio { background: var(--mint-bg); }
+#portfolio { background: var(--mint-section); }
 .portfolio-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: rgba(62,255,200,0.12);
+  gap: 16px;                          /* ★ gap 늘려 카드형으로 */
 }
-.pj-card { background: #0f1e1a; transition: background .25s; cursor: pointer; }
-.pj-card:hover { background: #152820; }
+/* ★ 카드 배경 — 흰색에 가까운 배경 + 민트 왼쪽 테두리 */
+.pj-card { background: #fff; border: 1px solid var(--mint-dk); border-top: 3px solid var(--mint-dk); transition: box-shadow .25s, transform .2s; cursor: pointer; border-radius: 2px; }
+.pj-card:hover { box-shadow: 0 8px 32px rgba(0,201,154,0.15); transform: translateY(-3px); }
 .pj-img {
-  width: 100%; aspect-ratio: 4/3; background: #0a1612;
+  width: 100%; aspect-ratio: 4/3; background: var(--mint-section2);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
-  color: rgba(62,255,200,0.2); border-bottom: 1px solid rgba(62,255,200,0.08);
+  font-family: var(--font-mono-accent); font-size: 9px; letter-spacing: 0.14em;
+  color: var(--mint-dk); border-bottom: 1px solid rgba(0,201,154,0.2);
   transition: color .25s;
 }
-.pj-card:hover .pj-img { color: rgba(62,255,200,0.45); }
+.pj-card:hover .pj-img { color: var(--mint-dk); }
 .pj-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pj-body { padding: 24px 28px; }
-.pj-num { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; color: var(--mint); margin-bottom: 8px; }
-.pj-title { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: var(--white); }
+/* ★ 카드 내 텍스트: 어두운 색으로 변경 (밝은 배경용) */
+.pj-num { font-family: var(--font-mono-accent); font-size: 9px; letter-spacing: 0.2em; color: var(--mint-dk); margin-bottom: 8px; }
+.pj-title { font-size: 17px; font-weight: 700; margin-bottom: 18px; color: var(--dark-text); }
 .pj-logic { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 12px; }
-.logic-k { font-weight: 700; color: var(--mint); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding-top: 1px; }
-.logic-v { color: var(--off); font-weight: 300; }
+.logic-k { font-weight: 700; color: var(--mint-dk); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding-top: 1px; }
+.logic-v { color: var(--dark-text2); font-weight: 400; }
 
 /* ────────────────────────────────────────
-   SERVICE TABLE — BLACK
+   SERVICE TABLE — BLACK 배경
+   ★ 단가표 수정 가이드:
+     - 가격 변경: 아래 HTML에서 row-basic / row-prem 안의 텍스트를 수정
+     - 컬럼 너비: grid-template-columns 값을 조정 (px 단위)
+     - 카테고리 추가: svc-cat div 블록을 복사해서 붙여넣기
 ──────────────────────────────────────── */
 #services { background: var(--black); }
 .svc-legend {
@@ -252,81 +278,107 @@ h2 .ghost {
 }
 .legend-item {
   display: flex; align-items: center; gap: 8px;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--off);
+  font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.04em; color: rgba(244,242,237,0.85); /* ★ 밝게 */
 }
 .legend-dot { width: 8px; height: 8px; }
 
 .svc-thead {
   display: grid;
-  grid-template-columns: 180px 1fr 160px 160px 40px;
+  grid-template-columns: 180px 1fr 170px 170px 40px;
   padding: 10px 20px;
-  background: #1a1a1a;
-  border: 1px solid var(--line);
+  background: #252525;           /* ★ 더 밝은 헤더 배경 */
+  border: 1px solid rgba(244,242,237,0.18);
   border-bottom: none;
 }
+/* ★ 테이블 헤더 텍스트 */
 .svc-th {
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em;
-  text-transform: uppercase; color: rgba(244,242,237,0.4); text-align: right;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(244,242,237,0.75); /* ★ 밝게 */
+  text-align: center;             /* ★ 가운데 정렬 통일 */
 }
 .svc-th:nth-child(-n+2) { text-align: left; }
 
-.svc-list { border: 1px solid var(--line); }
-.svc-cat { border-bottom: 1px solid var(--line); }
+.svc-list { border: 1px solid rgba(244,242,237,0.18); }
+.svc-cat { border-bottom: 1px solid rgba(244,242,237,0.12); }
 .svc-cat:last-child { border-bottom: none; }
 
 .svc-cat-head {
   display: grid;
-  grid-template-columns: 180px 1fr 160px 160px 40px;
-  cursor: pointer; background: #1c1c1c; transition: background .15s;
+  grid-template-columns: 180px 1fr 170px 170px 40px;
+  cursor: pointer; background: #242424; transition: background .15s;  /* ★ 밝게 */
 }
-.svc-cat-head:hover { background: #222; }
-.svc-cat-head.open { background: #202020; }
+.svc-cat-head:hover { background: #2c2c2c; }
+.svc-cat-head.open { background: #2a2a2a; }
 
 .svc-cat-head > div {
-  padding: 15px 20px;
-  border-right: 1px solid var(--line2);
+  padding: 16px 20px;
+  border-right: 1px solid rgba(244,242,237,0.08);
   display: flex; align-items: center;
 }
 .svc-cat-head > div:last-child { border-right: none; justify-content: center; }
 
+/* ★ 카테고리 레이블 */
 .cat-label {
-  font-family: var(--font-mono); font-size: 9px;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--mint);
-  font-weight: 500;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--mint);
 }
-.cat-name-ko { font-size: 12px; font-weight: 400; color: var(--white-dim, var(--off)); }
-.cat-price-basic { font-family: var(--font-mono); font-size: 11px; color: rgba(244,242,237,0.55); justify-content: flex-end; text-align: right; }
-.cat-price-prem  { font-family: var(--font-mono); font-size: 11px; color: var(--yellow); justify-content: flex-end; text-align: right; }
-.cat-arrow { font-size: 14px; color: var(--off); transition: transform .25s, color .2s; line-height: 1; }
+/* ★ 한글 서비스명 — 더 밝게 */
+.cat-name-ko { font-size: 13px; font-weight: 500; color: rgba(244,242,237,0.90); }
+/* ★ 가격 — 가운데 정렬, 밝게, 고딕체 */
+.cat-price-basic {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+  color: rgba(244,242,237,0.85);            /* ★ 밝게 */
+  justify-content: center; text-align: center; width: 100%;  /* ★ 가운데 정렬 */
+}
+.cat-price-prem  {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+  color: #ffd64a;                           /* ★ yellow 더 밝게 */
+  justify-content: center; text-align: center; width: 100%;  /* ★ 가운데 정렬 */
+}
+.cat-arrow { font-size: 14px; color: rgba(244,242,237,0.7); transition: transform .25s, color .2s; line-height: 1; }
 .svc-cat-head.open .cat-arrow { transform: rotate(45deg); color: var(--mint); }
 
 .svc-cat-body { display: none; }
 .svc-cat-body.visible { display: block; }
 
+/* ★ 세부 행 */
 .svc-row {
   display: grid;
-  grid-template-columns: 180px 1fr 160px 160px 40px;
-  padding: 11px 20px; align-items: center;
-  border-top: 1px solid var(--line2); transition: background .15s;
+  grid-template-columns: 180px 1fr 170px 170px 40px;
+  padding: 13px 20px; align-items: center;
+  border-top: 1px solid rgba(244,242,237,0.07); transition: background .15s;
+  background: #1d1d1d;          /* ★ 열린 행 배경 — 어둡지 않게 */
 }
-.svc-row:hover { background: rgba(62,255,200,0.03); }
-.row-name { font-size: 13px; font-weight: 500; color: var(--white); }
-.row-desc { font-size: 12px; font-weight: 300; color: rgba(244,242,237,0.45); padding-right: 16px; line-height: 1.55; }
-.row-basic { font-family: var(--font-mono); font-size: 11px; color: rgba(244,242,237,0.5); text-align: right; padding-right: 20px; display: flex; align-items: center; justify-content: flex-end; }
-.row-prem  { font-family: var(--font-mono); font-size: 11px; color: var(--yellow); text-align: right; padding-right: 20px; display: flex; align-items: center; justify-content: flex-end; }
+.svc-row:hover { background: rgba(62,255,200,0.06); }
+/* ★ 서비스명 — 더 밝게 */
+.row-name { font-size: 13px; font-weight: 600; color: rgba(244,242,237,0.95); }
+/* ★ 설명 — 더 밝게 */
+.row-desc { font-size: 12px; font-weight: 400; color: rgba(244,242,237,0.65); padding-right: 16px; line-height: 1.55; }
+/* ★ 가격 셀 — 가운데 정렬, 밝게 */
+.row-basic {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+  color: rgba(244,242,237,0.85);
+  text-align: center; display: flex; align-items: center; justify-content: center;
+}
+.row-prem  {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+  color: #ffd64a;
+  text-align: center; display: flex; align-items: center; justify-content: center;
+}
 
 .badge {
-  display: inline-flex; padding: 2px 8px;
-  font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.1em;
-  text-transform: uppercase; border: 1px solid;
+  display: inline-flex; padding: 3px 10px;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  border: 1px solid;
 }
-.badge-consult { border-color: rgba(62,255,200,0.35); color: var(--mint); }
-.badge-basic   { border-color: rgba(244,242,237,0.18); color: var(--off); }
+.badge-consult { border-color: rgba(62,255,200,0.5); color: var(--mint); }
+.badge-basic   { border-color: rgba(244,242,237,0.3); color: rgba(244,242,237,0.8); }
 
 /* ────────────────────────────────────────
-   WORKFLOW — MINT BG
+   WORKFLOW — 검정2 배경 (어두운)
+   ★ 배경 변경: #workflow { background: ... } 에서 수정
 ──────────────────────────────────────── */
-#workflow { background: var(--mint-bg); }
+#workflow { background: var(--black2); }
 .wf-track {
   display: grid; grid-template-columns: repeat(6, 1fr);
   gap: 0; position: relative; margin-top: 56px;
@@ -334,47 +386,50 @@ h2 .ghost {
 .wf-track::before {
   content: ''; position: absolute;
   top: 20px; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, var(--mint) 0%, rgba(62,255,200,0.15) 100%);
+  background: linear-gradient(90deg, var(--mint) 0%, rgba(62,255,200,0.08) 100%);
 }
 .wf-step { padding: 0 20px; position: relative; }
 .wf-dot {
   width: 11px; height: 11px;
   border: 1.5px solid var(--mint);
-  background: var(--mint-bg);
+  background: var(--black2);     /* ★ workflow 배경색과 맞춤 */
   transform: rotate(45deg); margin-bottom: 28px;
   position: relative; z-index: 1; transition: background .2s;
 }
 .wf-step:hover .wf-dot { background: var(--mint); }
 .wf-num {
   font-size: 36px; font-weight: 900; letter-spacing: -0.04em;
-  color: rgba(62,255,200,0.1); line-height: 1; margin-bottom: 10px;
+  color: rgba(62,255,200,0.18); line-height: 1; margin-bottom: 10px; /* ★ 밝게 */
   transition: color .25s;
 }
-.wf-step:hover .wf-num { color: rgba(62,255,200,0.22); }
+.wf-step:hover .wf-num { color: rgba(62,255,200,0.35); }
 .wf-title {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
-  color: var(--white); margin-bottom: 8px; text-transform: uppercase;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+  color: rgba(244,242,237,0.95); margin-bottom: 8px; text-transform: uppercase; /* ★ 밝게 */
 }
-.wf-body { font-size: 12px; font-weight: 300; color: var(--off); line-height: 1.7; }
-.wf-note { margin-top: 8px; font-family: var(--font-mono); font-size: 9px; color: var(--yellow); }
+.wf-body { font-size: 12px; font-weight: 400; color: rgba(244,242,237,0.72); line-height: 1.7; } /* ★ 밝게 */
+.wf-note { margin-top: 8px; font-family: var(--font-mono-accent); font-size: 9px; color: var(--yellow); }
 
 /* ────────────────────────────────────────
-   NOTICE — BLACK2
+   NOTICE — 흰회색 배경
+   ★ 배경 변경: --gray-white 변수 또는 아래 background 직접 수정
 ──────────────────────────────────────── */
-#notice { background: var(--black2); }
+#notice { background: var(--gray-white); border-bottom: 1px solid var(--gray-line); }
 .notice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; }
+/* ★ Notice 제목 — 어두운 텍스트 (밝은 배경) */
 .notice-block h4 {
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--mint);
-  padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--line2);
+  font-family: var(--font-mono-accent); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--mint-dk);
+  padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--gray-line);
 }
 .notice-block ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+/* ★ Notice 본문 — 어두운 텍스트 */
 .notice-block li {
-  font-size: 13px; font-weight: 300; color: var(--off); line-height: 1.75;
+  font-size: 13px; font-weight: 400; color: var(--dark-text2); line-height: 1.75;
   padding-left: 16px; position: relative;
 }
-.notice-block li::before { content: '—'; position: absolute; left: 0; color: var(--faint); }
-.notice-block li strong { color: var(--white); font-weight: 500; }
+.notice-block li::before { content: '—'; position: absolute; left: 0; color: var(--dark-text3); }
+.notice-block li strong { color: var(--dark-text); font-weight: 700; }
 
 /* ────────────────────────────────────────
    CONTACT — BLACK
@@ -390,14 +445,14 @@ h2 .ghost {
 .contact-links { margin-top: 44px; display: flex; flex-direction: column; gap: 22px; }
 .c-row { display: flex; align-items: flex-start; gap: 20px; }
 .c-key {
-  width: 20px; font-size: 11px; font-weight: 700; font-family: var(--font-mono);
+  width: 20px; font-size: 11px; font-weight: 700; font-family: var(--font-mono-accent);
   letter-spacing: 0.1em; color: var(--mint); flex-shrink: 0; padding-top: 1px;
 }
-.c-val { font-size: 14px; font-weight: 300; color: var(--off); line-height: 1.6; }
+.c-val { font-size: 14px; font-weight: 400; color: rgba(244,242,237,0.85); line-height: 1.6; } /* ★ 밝게 */
 .c-val a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); transition: color .2s; }
 .c-val a:hover { color: var(--mint); border-color: var(--mint); }
 
-.contact-desc { margin-top: 18px; font-size: 14px; font-weight: 300; color: var(--off); line-height: 1.85; max-width: 360px; }
+.contact-desc { margin-top: 18px; font-size: 14px; font-weight: 400; color: rgba(244,242,237,0.80); line-height: 1.85; max-width: 360px; } /* ★ 밝게 */
 
 .inq-steps { border: 1px solid var(--line); margin: 32px 0; }
 .inq-step {
@@ -406,30 +461,30 @@ h2 .ghost {
 }
 .inq-step:last-child { border-bottom: none; }
 .inq-n {
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em;
+  font-family: var(--font-mono-accent); font-size: 9px; letter-spacing: 0.1em;
   color: var(--mint); width: 20px; flex-shrink: 0; padding-top: 2px;
 }
-.inq-t { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
-.inq-d { font-size: 12px; font-weight: 300; color: rgba(244,242,237,0.45); line-height: 1.65; }
+.inq-t { font-size: 13px; font-weight: 600; color: rgba(244,242,237,0.95); margin-bottom: 3px; } /* ★ 밝게 */
+.inq-d { font-size: 12px; font-weight: 400; color: rgba(244,242,237,0.65); line-height: 1.65; } /* ★ 밝게 */
 
 .btn-actions { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 
 .mail-tpl {
   display: none; margin-top: 12px; padding: 18px 20px;
   background: #1a1a1a; border: 1px solid var(--line);
-  font-family: var(--font-mono); font-size: 11px; line-height: 2; color: var(--off);
+  font-family: var(--font-mono-accent); font-size: 11px; line-height: 2; color: rgba(244,242,237,0.75);
 }
 .mail-tpl.show { display: block; }
 .tpl-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); margin-bottom: 8px; }
 .copy-btn {
   margin-top: 12px; display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  font-family: var(--font-mono-accent); font-size: 9px; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--mint);
   background: none; border: 1px solid rgba(62,255,200,.25); padding: 6px 14px;
   cursor: pointer; transition: background .2s;
 }
 .copy-btn:hover { background: rgba(62,255,200,.08); }
-.note-small { margin-top: 16px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: rgba(244,242,237,0.3); line-height: 1.9; }
+.note-small { margin-top: 16px; font-family: var(--font-mono-accent); font-size: 10px; letter-spacing: 0.08em; color: rgba(244,242,237,0.45); line-height: 1.9; }
 
 /* ────────────────────────────────────────
    FOOTER
@@ -438,8 +493,8 @@ footer {
   padding: 24px 52px;
   display: flex; justify-content: space-between; align-items: center;
   background: #0d0d0d; border-top: 1px solid var(--line);
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em;
-  color: rgba(244,242,237,0.3);
+  font-family: var(--font-mono-accent); font-size: 10px; letter-spacing: 0.12em;
+  color: rgba(244,242,237,0.5); /* ★ 밝게 */
 }
 footer a { color: inherit; text-decoration: none; }
 footer a:hover { color: var(--mint); }
@@ -511,7 +566,9 @@ footer a:hover { color: var(--mint); }
   </ul>
 </nav>
 
-<!-- ──── HERO ──── -->
+<!-- ──── HERO (메인 — 검정 배경) ──── -->
+<!-- ★ 메인 문구 수정: hero-desc 안의 텍스트를 바꾸세요 -->
+<!-- ★ 버튼 링크: href="#contact" / href="#services" — # 뒤의 ID가 이동할 섹션 -->
 <section id="hero">
   <div class="hero-left">
     <p class="hero-tag">비유 / 比喩 — Visualizing the Invisible</p>
@@ -567,12 +624,14 @@ footer a:hover { color: var(--mint); }
   </div>
 </div>
 
-<!-- ──── PORTFOLIO (MINT BG) ──── -->
+<!-- ──── PORTFOLIO (연민트 배경) ──── -->
+<!-- ★ 이미지 넣는 법: 각 pj-img div를 <img src="project1.jpg" class="pj-img" alt="프로젝트명"> 으로 교체하세요 -->
+<!-- ★ 배경색 변경: CSS --mint-section 변수를 수정하세요 -->
 <section id="portfolio" class="sec-mint">
   <div class="sec-header fi">
-    <p class="sec-tag">Strategic Archive</p>
-    <h2>PORTFOLIO<span class="ghost">GRID</span></h2>
-    <p class="sec-desc">단순한 이미지가 아닌 <strong>문제 → 논리 → 해결</strong>의 전략 보고서 형식으로 소개합니다.</p>
+    <p class="sec-tag" style="color:var(--mint-dk)">Strategic Archive</p>
+    <h2 style="color:#1a1a1a">PORTFOLIO<span class="ghost" style="-webkit-text-stroke:1px rgba(0,0,0,0.18);color:transparent">GRID</span></h2>
+    <p class="sec-desc" style="color:#555555">단순한 이미지가 아닌 <strong style="color:#1a1a1a">문제 → 논리 → 해결</strong>의 전략 보고서 형식으로 소개합니다.</p>
   </div>
   <div class="portfolio-grid">
     <div class="pj-card fi">
@@ -615,7 +674,9 @@ footer a:hover { color: var(--mint); }
   </div>
 </section>
 
-<!-- ──── SERVICES (BLACK) ──── -->
+<!-- ──── SERVICES 단가표 (검정 배경) ──── -->
+<!-- ★ 가격 수정: 각 row-basic / row-prem 안의 텍스트를 직접 수정하세요 -->
+<!-- ★ 카테고리 열고닫기: onclick="tog(this)" — 건드리지 마세요 (자동 작동) -->
 <section id="services" class="sec-black">
   <div class="sec-header fi">
     <p class="sec-tag">Service Guide</p>
@@ -784,8 +845,9 @@ footer a:hover { color: var(--mint); }
   </div>
 </section>
 
-<!-- ──── WORKFLOW (MINT BG) ──── -->
-<section id="workflow" class="sec-mint">
+<!-- ──── WORKFLOW (검정2 배경) ──── -->
+<!-- ★ 배경색 변경: CSS #workflow { background: ... } 에서 수정 -->
+<section id="workflow" class="sec-black2">
   <div class="sec-header fi">
     <p class="sec-tag">6-Step Process</p>
     <h2>HOW WE<span class="ghost">WORK</span></h2>
@@ -801,11 +863,12 @@ footer a:hover { color: var(--mint); }
   </div>
 </section>
 
-<!-- ──── NOTICE (BLACK2) ──── -->
+<!-- ──── NOTICE (흰회색 배경) ──── -->
+<!-- ★ 이 섹션 배경색: CSS #notice { background: var(--gray-white); } 에서 수정 -->
 <section id="notice" class="sec-black2">
-  <div class="sec-header fi">
-    <p class="sec-tag">운영 정책</p>
-    <h2>NOTICE &amp;<span class="ghost">POLICY</span></h2>
+  <div class="sec-header fi" style="--sec-tag-color:#00c99a">
+    <p class="sec-tag" style="color:var(--mint-dk,#00c99a)">운영 정책</p>
+    <h2 style="color:#1a1a1a">NOTICE &amp;<span class="ghost" style="-webkit-text-stroke:1px rgba(0,0,0,0.18);color:transparent">POLICY</span></h2>
   </div>
   <div class="notice-grid fi">
     <div class="notice-block">
@@ -827,7 +890,9 @@ footer a:hover { color: var(--mint); }
   </div>
 </section>
 
-<!-- ──── CONTACT (BLACK) ──── -->
+<!-- ──── CONTACT (검정 배경) ──── -->
+<!-- ★ 연락처 수정: c-val 안의 전화번호·이메일·주소를 바꾸세요 -->
+<!-- ★ 이메일 수신 주소: mailto: 뒤의 이메일 주소를 수정하세요 -->
 <section id="contact">
   <div class="contact-l">
     <div class="fi">
@@ -873,6 +938,7 @@ footer a:hover { color: var(--mint); }
 </section>
 
 <!-- ──── FOOTER ──── -->
+<!-- ★ 연도·이름 수정: © 2025 BYOO DESIGN — 변지영 부분을 바꾸세요 -->
 <footer>
   <span>© 2025 BYOO DESIGN — 변지영</span>
   <span style="display:flex;gap:24px">
@@ -883,14 +949,23 @@ footer a:hover { color: var(--mint); }
 </footer>
 
 <script>
-  /* accordion */
+  /* ────────────────────────────────────────
+     자바스크립트 — 코드 수정 시 주의사항
+     ★ tog() : 단가표 카테고리 열고닫기 (건드리지 마세요)
+     ★ toggleTpl() : 이메일 양식 미리보기 토글 (건드리지 마세요)
+     ★ doCopy() : 이메일 템플릿 복사 기능
+       → 이메일 내용 수정: 아래 t = `...` 안의 텍스트를 바꾸세요
+     ★ IntersectionObserver : 스크롤 시 요소 페이드인 애니메이션
+  ──────────────────────────────────────── */
+  /* 단가표 아코디언 */
   function tog(h) {
     h.classList.toggle('open');
     h.nextElementSibling.classList.toggle('visible');
   }
-  /* mail template */
+  /* 이메일 양식 미리보기 */
   function toggleTpl() { document.getElementById('tpl').classList.toggle('show'); }
   function doCopy() {
+    /* ★ 이메일 내용 수정: 아래 텍스트를 바꾸세요 */
     const t = `To: 1byoung24@naver.com\nSubject: BYOO 디자인 문의\n\n안녕하세요, 변지영 디자이너님!\n\n[작업 유형] :\n[레퍼런스 / 무드] :\n[희망 납기일] :\n[예산 범위] :\n[기타 요청사항] :`;
     navigator.clipboard.writeText(t).then(() => {
       const b = document.querySelector('.copy-btn');
@@ -898,13 +973,13 @@ footer a:hover { color: var(--mint); }
       setTimeout(() => b.textContent = '복사하기 ↗', 2200);
     });
   }
-  /* fade in */
+  /* 스크롤 페이드인 애니메이션 — fi 클래스가 붙은 요소가 화면에 들어오면 in 클래스 추가 */
   const io = new IntersectionObserver(
     es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
     { threshold: 0.08 }
   );
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
-  /* open first category */
+  /* 첫 번째 단가표 카테고리 자동 열기 */
   document.querySelector('.svc-cat-head').click();
 </script>
 </body>
